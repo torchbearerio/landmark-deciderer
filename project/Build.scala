@@ -28,7 +28,7 @@ object LandmarkDecidererBuild extends Build {
       description := "Landmark Deciderer",
       libraryDependencies ++= additionalComponents, // See below
       resolvers ++= ExtraResolvers,
-      mainClass in(Compile, run) := Some("io.torachbearer.landmarkdeciderer.LandmarkDeciderer"),
+      mainClass in(Compile, run) := Some("io.torchbearer.landmarkdeciderer.LandmarkDeciderer"),
       dockerSettings
     )
   ).dependsOn(core).enablePlugins(DockerPlugin)
@@ -55,7 +55,7 @@ object LandmarkDecidererBuild extends Build {
   val tsAssemblySettings = assemblySettings ++ Seq(
     assemblyOutputPath in assembly := file("target/build.jar"),
     assemblyJarName in assembly := "build.jar",
-    mainClass in assembly := Some("io.torachbearer.landmarkdeciderer.LandmarkDeciderer")
+    mainClass in assembly := Some("io.torchbearer.landmarkdeciderer.LandmarkDeciderer")
   )
 
   // ------------------------------------------
@@ -70,7 +70,7 @@ object LandmarkDecidererBuild extends Build {
 
   // To enable a component remove the //
   val additionalComponents =
-  Seq(akka, dl4j)
+  Seq(akka, ws4j, json4s, breeze)
 
 
   // ------------------------------------------
@@ -79,7 +79,12 @@ object LandmarkDecidererBuild extends Build {
 
   // Other components
   lazy val akka = "com.typesafe.akka" %% "akka-actor" % "2.5.0"
-  lazy val dl4j = "org.deeplearning4j" % "deeplearning4j-nlp" % "0.8.0"
+  lazy val json4s = "org.json4s" %% "json4s-jackson" % "3.5.0"
+  lazy val breeze = "org.scalanlp" %% "breeze" % "0.13.1"
+  lazy val ws4j = "de.sciss" % "ws4j" % "0.1.0"
+  lazy val jena = "org.apache.jena" % "apache-jena-libs" % "3.3.0"
+  lazy val coreNLP = "edu.stanford.nlp" % "stanford-corenlp" % "3.8.0"
+  lazy val coreNLPModel = "edu.stanford.nlp" % "stanford-corenlp" % "3.8.0" classifier "models"
 
   // Additional repos, required by some components
   final val ExtraResolvers = Seq(
