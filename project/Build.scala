@@ -44,7 +44,7 @@ object LandmarkDecidererBuild extends Build {
 
     new Dockerfile {
       from("java")
-      add(artifact, artifactTargetPath)
+      add("build.jar", artifactTargetPath)
       entryPoint("java", "-jar", artifactTargetPath)
     }
   }
