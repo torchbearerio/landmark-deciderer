@@ -1,12 +1,12 @@
 branch-defaults:
   master:
-    environment: null
+    environment: landmark-deciderer-dev
     group_suffix: null
 deploy:
   artifact: target/build.zip
 environment-defaults:
-  color-service-dev:
-    branch: null
+  landmark-deciderer-dev:
+    branch: master
     repository: null
 global:
   application_name: landmark-deciderer
