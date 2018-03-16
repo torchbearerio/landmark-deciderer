@@ -94,7 +94,7 @@ class LandmarkDecidererTask(epId: Int, hitId: Int, taskToken: String)
         }
       }).toString
 
-      val computedDesc = s"$colorString ${bestLandmark.description getOrElse "thing"}"
+      val computedDesc = s"$colorString ${bestLandmark.description getOrElse "thing"}".trim
 
       // Update the selected landmark's computedDescription in DB
       bestLandmark.updateComputedDescription(computedDesc)
