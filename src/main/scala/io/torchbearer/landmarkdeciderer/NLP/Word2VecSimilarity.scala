@@ -19,6 +19,10 @@ object Word2VecSimilarity {
     val filteredWords1 = words1.filter(w => model.contains(w))
     val filteredWords2 = words2.filter(w => model.contains(w))
 
+    // If one of the sequences contains no known words, then we return 0 (entirely dissimilar)
+    if (filteredWords1.isEmpty || filteredWords2.isEmpty)
+      return 0
+
     val v1 = model.sumVector(filteredWords1)
     val v2 = model.sumVector(filteredWords2)
 
