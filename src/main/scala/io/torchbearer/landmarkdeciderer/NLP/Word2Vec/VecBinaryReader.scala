@@ -14,32 +14,27 @@
 
 package io.torchbearer.landmarkdeciderer.NLP.Word2Vec
 
-import java.io.{BufferedInputStream, DataInputStream, File, FileInputStream}
+import java.io._
 
 import scala.collection.mutable.ArrayBuffer
 
 /** A simple binary file reader.
   * @constructor Create a binary file reader.
-  * @param file The binary file to be read.
+  * @param stream An InputStream corresponding to the vectors binary file.
   *
   * @author trananh
   */
-class VecBinaryReader(val file: File) {
-
-  /** Overloaded constructor */
-  def this(filename: String) = this(new File(filename))
+class VecBinaryReader(val stream: InputStream) {
 
   /** ASCII values for common delimiter characters */
   private val SPACE = 32
   private val LF = 10
 
   /** Open input streams */
-  private val fis = new FileInputStream(file)
-  private val bis = new BufferedInputStream(fis)
-  private val dis = new DataInputStream(bis)
+  private val dis = new DataInputStream(stream)
 
   /** Close the stream. */
-  def close() { dis.close(); bis.close(); fis.close() }
+  def close() { dis.close(); stream.close(); }
 
   /** Read the next byte.
     * @return The next byte from the file.

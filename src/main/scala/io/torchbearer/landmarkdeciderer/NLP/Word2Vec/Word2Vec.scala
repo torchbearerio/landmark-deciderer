@@ -55,13 +55,10 @@ class Word2Vec {
     */
   def load(filename: String, limit: Integer = Int.MaxValue, normalize: Boolean = true): Unit = {
     // Check edge case
-    val file = new File(getClass.getClassLoader.getResource(filename).getFile)
-    if (!file.exists()) {
-      throw new FileNotFoundException("Binary vector file not found <" + file.toString + ">")
-    }
+    val stream = getClass.getClassLoader.getResourceAsStream(filename)
 
     // Create new reader to read data
-    val reader = new VecBinaryReader(file)
+    val reader = new VecBinaryReader(stream)
 
     // Read header info
     numWords = Integer.parseInt(reader.readToken())
@@ -88,7 +85,7 @@ class Word2Vec {
     }
     println("Loaded " + math.min(numWords, limit) + " words.\n")
 
-    // Finally, close the reader
+    // Finally, close the reader and the stream
     reader.close()
   }
 
