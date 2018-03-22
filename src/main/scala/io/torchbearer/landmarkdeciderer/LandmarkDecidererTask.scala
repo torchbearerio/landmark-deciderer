@@ -18,6 +18,9 @@ class LandmarkDecidererTask(epId: Int, hitId: Int, taskToken: String)
     println(s"Deciding landmark for ep $epId, hit $hitId")
 
     try {
+      // Set start time
+      Hit.setStartTimeForTask(hitId, "landmark_deciderer", System.currentTimeMillis)
+
       // Get hit
       val hit = Hit.getHit(hitId) getOrElse {
         throw new Exception("Error: Unable to load Hit")
@@ -112,6 +115,11 @@ class LandmarkDecidererTask(epId: Int, hitId: Int, taskToken: String)
         e.printStackTrace()
         sendFailure("Landmark Deciderer error", e.getMessage)
       }
+    }
+
+    finally {
+      // Set end time
+      Hit.setEndTimeForTask(hitId, "landmark_deciderer", System.currentTimeMillis)
     }
   }
 
